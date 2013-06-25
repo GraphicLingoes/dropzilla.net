@@ -1,0 +1,88 @@
+<script id="cp-main-panel" type="text/x-handlebars-template">
+	<section id="panelSection">	
+		<label for="dzParentMenuItem">Dropdown Menu Item:</label>
+		<input type="text" id="dzParentMenuItem" />&nbsp;<a class="btn" href="#" name="addMenuParentItem"><i class="icon-plus"></i></a>
+		<label for="dzMenuOrientation">Menu Orientation:</label>
+		<select id="dzMenuOrientation">
+			<option value="vertical">Vertical</option>
+			<option value="horizontal">Horizontal</option>
+		</select>
+		<label for="dzMenuLinkType">Link Style:</label>
+		<select id="dzMenuLinkType">
+			<option value="normal">Normal</option>
+			<option value="block">Block</option>
+		</select>
+	</section>
+	<section id="panelSection">
+		<label for="full">Page Background:</label>
+			<input type='text' id="full" />
+		<div id="paddingMarginWrapper">
+			<div class="dzMarginOptions">
+				<label>Margins:&nbsp;<span class="dzMarginLabel"></span><a href="#" name="dzToggleMarginOptions" title="Toggle all margin options" alt="Toggle all margin options."><i class="icon-random"></i></a></label>
+				<div class="dzMarginOptionsA">
+					<input type="text" id="dzParentMargins" />
+				</div>
+				<div class="dzMarginOptionsB">
+					<input type="text" id="dzParentMarginTop" />&nbsp;
+					<input type="text" id="dzParentMarginRight" />&nbsp;
+					<input type="text" id="dzParentMarginBottom" />&nbsp;
+					<input type="text" id="dzParentMarginLeft" />
+				</div>
+				<span class="dzMarginAddSpan">&nbsp;<a class="btn" href="#" name="addMenuParentMargins"><i class="icon-plus"></i></a></span>
+			</div>
+			<div class="dzPaddingSpacer">&nbsp;</div>
+			<div class="dzPaddingOptions">
+				<label>Padding:&nbsp;<span class="dzPaddingLabel"></span><a href="#" name="dzTogglePaddingOptions" title="Toggle all padding options" alt="Toggle all padding options."><i class="icon-random"></i></a></label>
+				<div class="dzPaddingOptionsA">
+					<input type="text" id="dzParentPadding" />
+				</div>
+				<div class="dzPaddingOptionsB">
+					<input type="text" id="dzParentPaddingTop" />&nbsp;
+					<input type="text" id="dzParentPaddingRight" />&nbsp;
+					<input type="text" id="dzParentPaddingBottom" />&nbsp;
+					<input type="text" id="dzParentPaddingLeft" />
+				</div>
+				<span class="dzPaddingAddSpan">&nbsp;<a class="btn" href="#" name="addMenuParentPadding"><i class="icon-plus"></i></a></span>
+			</div>
+		</div>
+	</section>
+	<section id="panelSection">
+		<label for="borderColorSelect">Border Color:</label>
+			<input type='text' id="borderColorSelect" />
+		<label for="dzBorderType" style="margin-top:9px;">Border Type:</label>
+			<select id="dzBorderType">
+				<option value="none">none</option>
+				<option value="hidden">hidden</option>
+				<option value="dotted">dotted</option>
+				<option value="dashed">dashed</option>
+				<option value="solid">solid</option>
+				<option value="double">double</option>
+				<option value="groove">groove</option>
+				<option value="ridge">ridge</option>
+				<option value="inset">inset</option>
+				<option value="inherit">outset</option>
+			</select>
+		<div class="dzBorderOptions">
+				<label>Borders (size):&nbsp;<span class="dzBorderLabel"></span><a href="#" name="dzToggleBorderOptions" title="Toggle all border options" alt="Toggle all border options."><i class="icon-random"></i></a></label>
+				<div class="dzBorderOptionsA">
+					<input type="text" id="dzParentBorders" />
+				</div>
+				<div class="dzBorderOptionsB">
+					<input type="text" id="dzParentBorderTop" />&nbsp;
+					<input type="text" id="dzParentBorderRight" />&nbsp;
+					<input type="text" id="dzParentBorderBottom" />&nbsp;
+					<input type="text" id="dzParentBorderLeft" />
+				</div>
+				<span class="dzBorderAddSpan">&nbsp;<a class="btn" href="#" name="addMenuParentBorders"><i class="icon-plus"></i></a></span>
+		</div>
+	</section>
+	<section id="panelSection">
+		<label for="parentLinkColor">Parent Link Color</label>
+		<input type="text" id="parentLinkColor" /><br />
+		<label for="parentLinkHoverColor">Parent Link Hover Color</label>
+		<input type="text" id="parentLinkHoverColor" /><br />
+		<label for="BackgroundColorSelect">Menu Bkgrd Color:</label>
+			<input type='text' id="BackgroundColorSelect" /><br /><br />
+			<button id="dzGetCode">Get Code</button>
+	</section
+</script>
