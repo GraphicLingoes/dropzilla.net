@@ -9,6 +9,7 @@ Abstract class Routes {
 			array('/', array('controller' => 'default', 'action' => 'index', 'view' => 'Default')),
 			array('/api/alpha:page/alpha:action/:id', array('controller' => 'api')),
 			//array('/api/alpha:page/alpha:action', array('controller' => 'api')),
+			// This is the main api route, keep it simple api/controllerName/actionName
 			array('/api/regex:(?P<controller>([a-z]+?))/alpha:action'),
 			array('/regex:(?P<api>([a-z]+?))-(?P<api_controller>([a-z]+?))/alpha:page/alpha:action/:id'),
 			array('/alpha:page/alpha:action', array('controller' => 'default'))
