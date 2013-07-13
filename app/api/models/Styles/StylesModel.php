@@ -31,10 +31,7 @@ class StylesModel {
 				$css .= "\t" . $key . ":" . $value . ";\n";
 			}
 			$css .= "}\n";
-			$handle = fopen(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $fileName, "a+");
-			fwrite($handle, $css);
-			fclose($handle);
-			return true;
+		 	return $css;
 		}
 		catch(Exception $e)
 		{
@@ -60,6 +57,45 @@ class StylesModel {
 			return true;
 		}
 		return false;
+	}
+
+	public function openFile($fileName, $flag)
+	{
+		try
+		{
+			$handle = fopen(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $fileName . ".css", $flag);
+			return $handle;
+		}
+		catch(Exception $e)
+		{
+			throw new Exception("Error opening user style sheet: " + $e->getMessage());
+		}
+	}
+
+	public function closeFile($handle)
+	{
+		try
+		{
+			fclose($handle);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			throw new Exception("Error closing user style sheet: " + $e->getMessage());
+		}
+	}
+
+	public function writeToFile($handle, $data)
+	{
+		try
+		{
+			fwrite($handle, $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			throw new Exception("Error writing user style sheet: " + $e->getMessage());
+		}
 	}
 
 }

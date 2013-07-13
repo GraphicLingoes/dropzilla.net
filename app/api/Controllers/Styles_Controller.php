@@ -11,17 +11,22 @@ class Styles_Controller extends Base_Controller {
 		$request = parent::$request;
 		$model = parent::getModel('Styles', 'Styles');
 		// Attempt to build css
-		if($model->buildCss())
+		// 
+		$handle = $model->openFile(parent::$request->get("fileName"), "a+");
+		$css = $model->buildCss();
+			
+		if($model->writeToFile($handle, $css))
 		{
 			$response->set('result', array(
 				"passed" => 1
 			));
-			$response->renderResonse();
 		}
 		else
 		{
 			$response->set('error', "1");
 		}
+		$model->closeFile($handle);
+		$response->renderResonse();
 		
 		/*
 		
@@ -30,12 +35,21 @@ class Styles_Controller extends Base_Controller {
 	}
 
 	public function action_update () {
+
+		//TODO: Figure out how to get regex to match CSS selector for both update and delete actions
+
+
+
 		$response = parent::$response;
 		$request = parent::$request;
 		$fileName = $request->get("fileName") . ".css";
 		$cssSelector = $request->get("cssSelector");
 		$fileContents = file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $fileName);
-		$regex = "/^(?P<class>" . $cssSelector . "\s*{\n*\r*(?:\n*\r*\t.*\n*\r*)+})/";
+		//$regex = "/^(?P<class>" . $cssSelector . "\s*{\n*\r*(?:\n*\r*\t.*\n*\r*)+})/";
+		$regex = "/^" . "\\" .$cssSelector . "\s*{.*?(?:.*\\n)+}/s";
+		$test = preg_match($regex, $fileContents, $matches);
+		echo $regex;
+		echo '<pre>' . print_r($matches, 1) . '</pre>';
 		$newFileContents = preg_replace($regex, "", $fileContents);
 		echo trim($newFileContents, "\n");
 	}
