@@ -24,7 +24,6 @@ class StylesModel {
 		{
 			$cssSelector = $this->request->get("cssSelector");
 			$properties = $this->request->get("properties");
-			$fileName = $this->request->get("fileName") . ".css";
 			$css = $cssSelector . " {\n";
 			foreach($properties as $key => $value)
 			{
@@ -40,8 +39,17 @@ class StylesModel {
 		return false;
 	}
 
-	public function updateCssBySelector()
+	public function updateCssBySelector($params)
 	{
+		// Find css and extract it from selector
+		// Iterate throuh extracted css to update or add css without getting rid of what exists already
+		// Use preg_replace to update selector in same position it was originally in
+		// Write update content back to file
+		if(is_array)
+		{
+			$fileContents = file_get_contents($params['fileName']);
+			
+		}
 		
 	}
 

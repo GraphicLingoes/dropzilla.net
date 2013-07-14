@@ -58,9 +58,13 @@ if (!file_exists($file)) {
 		$controller::setRequestVars($request);
 	}
 
-	if($controller->$action())
+	if(method_exists($controller, $action))
 	{
-
+		$controller->$action();
+	}
+	else
+	{
+		throw new Exception("{$action} method does not exist");
 	}
 }
 //echo '<pre>' . print_r($routeData, 1) . '</pre>';
