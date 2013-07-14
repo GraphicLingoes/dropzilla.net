@@ -45,9 +45,8 @@ class Styles_Controller extends Base_Controller {
 		$fileName = $request->get("fileName") . ".css";
 		$cssSelector = $request->get("cssSelector");
 		$fileContents = file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $fileName);
-		//$regex = "/^(?P<class>" . $cssSelector . "\s*{\n*\r*(?:\n*\r*\t.*\n*\r*)+})/";
-		$regex = "/^" . "\\" .$cssSelector . "\s*{.*?(?:.*\\n)+}/s";
-		$test = preg_match($regex, $fileContents, $matches);
+		$regex = '/(?P<selectorName>' . $cssSelector . '.*{.*})/s';
+		preg_match($regex, $fileContents, $matches);
 		echo $regex;
 		echo '<pre>' . print_r($matches, 1) . '</pre>';
 		$newFileContents = preg_replace($regex, "", $fileContents);
@@ -59,9 +58,8 @@ class Styles_Controller extends Base_Controller {
 		$request = parent::$request;
 		$fileName = $request->get("fileName") . ".css";
 		$cssSelector = $request->get("cssSelector");
-		//$fileContents = file(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $fileName, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 		$fileContents = file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $fileName);
-		$regex = "/^(?P<class>" . $cssSelector . "\s*{\n*\r*(?:\n*\r*\t.*\n*\r*)+})/";
+		$regex = '/(?P<selectorName>' . $cssSelector . '.*{.*})/s';
 		$newFileContents = preg_replace($regex, "", $fileContents);
 		echo trim($newFileContents, "\n");
 
