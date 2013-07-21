@@ -3,6 +3,10 @@
 $appPath = '../../app';
 $apiPath = $appPath . '/api';
 
+function showMe($showMeArray) {
+	echo '<pre>' . print_r($showMeArray, 1) . '</pre>';
+}
+
 //Dropzilla API Index
 // Define constants
 define('API_DEBUG', TRUE);
@@ -54,7 +58,7 @@ if (!file_exists($file)) {
 	if(isset($postData))
 	{
 		$request = new Request();
-		$request->add($postData);
+		$request->set($postData);
 		$controller::setRequestVars($request);
 	}
 

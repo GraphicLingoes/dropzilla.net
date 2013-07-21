@@ -17,7 +17,10 @@ class StylesModel {
 			$this->request = $request;
 		}
 	}
-
+	/**
+	 * [buildCss Builds style from provided properties array]
+	 * @return [string] [Returns build style]
+	 */
 	public function buildCss()
 	{
 		try
@@ -34,30 +37,99 @@ class StylesModel {
 		}
 		catch(Exception $e)
 		{
-			throw new Exception("file not found!" + $e->getMessage());
+			throw new Exception("Styles model, buildCss => " + $e->getMessage());
 		}
 		return false;
 	}
-
-	public function updateCssBySelector($params)
-	{
-		// Find css and extract it from selector
-		// Iterate throuh extracted css to update or add css without getting rid of what exists already
-		// Use preg_replace to update selector in same position it was originally in
-		// Write update content back to file
-		if(is_array)
+	/**
+	 * [rebuildCss Iterates through new CSS properties and adds or updates existing css]
+	 * 
+	 * @return [array] [Returns array with CSS property names as keys and properties as values.]
+	 */
+	public function rebuildCss() {
+		try
 		{
-			$fileContents = file_get_contents($params['fileName']);
-			
+			$innerCssArray = $this->request->get("innerCssArray");
+			$properties = $this->request->get("properties");
+
+			foreach($properties as $key => $value)
+			{
+				$innerCssArray[$key] = $value;
+			}
+
+			return $innerCssArray;
+
 		}
-		
+		catch(Exception $e)
+		{
+			throw new Exception("Styles model, rebuildCss => " + $e->getMessage());
+		}
+	}
+	/**
+	 * [updateCssBySelector This method uses file_get_contents to load css file into string. Using preg_match
+	 * the existing CSS for given selector is extracted and loaded into an array. From there the new CSS is
+	 * add and/or updated. This method does not delete any existing CSS, it only updates or adds.]
+	 * 
+	 * @return [mixed] [Returns false if match is not found. Returns a string if match is found.]
+	 */
+	public function updateCssBySelector()
+	{
+		try
+		{
+			$fileContents = file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $this->request->get('fileName') . ".css");
+			
+			$regex = "/(" . $this->request->get('cssSelector') . "{1}\s{(?<innerCss>(\s\t.*?){1,}\s)}){1}/";
+			$matchFound = preg_match($regex, $fileContents, $matches);
+			
+			if($matchFound === false ||  $matchFound == 0)
+			{
+				// No match is found, return false.
+				return false;
+			}
+			else
+			{
+				$innerCssArray = array();
+				
+				$innerCss = explode("\n", $matches['innerCss']);
+				foreach($innerCss as $row)
+				{
+					$rowExplode = explode(":", $row);
+					if($row != "")
+					{
+						$innerCssArray[trim($rowExplode[0], "\t")] = rtrim($rowExplode[1], ";");
+					}
+				}
+				// store this value in $request object
+				$this->request->set("innerCssArray", $innerCssArray);
+				// Rebuild CSS
+				$rebuiltCssArray = $this->rebuildCss();
+				if(is_array($rebuiltCssArray))
+				{
+					$this->request->set("properties", $rebuiltCssArray);
+					$replacementCss = $this->buildCss();
+					$updateCssFile = preg_replace($regex, rtrim($replacementCss, "\n"), $fileContents);
+					return $updateCssFile;
+
+				} else {
+					return false;
+				}
+
+			}
+		}
+		catch (Exception $e)
+		{
+			throw new Exception("Styles Model, updateCssBySelector => " . $e.getMessage());
+		}
 	}
 
 	public function removeCssBySelector()
 	{
 
 	}
-
+	/**
+	 * [checkFile Checks to see if provided stylesheet exists in the user_content directory.]
+	 * @return [boolean] [True if file exists, false if it does not.]
+	 */
 	private function checkFile()
 	{
 		if(file_exists(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $this->request->get("fileName") . ".css"))
@@ -66,7 +138,12 @@ class StylesModel {
 		}
 		return false;
 	}
-
+	/**
+	 * [openFile Helper method to open given file name.]
+	 * @param  [string] $fileName [File name for given user style sheet]
+	 * @param  [string] $flag     [PHP fopen flag]
+	 * @return [handle]           [fopen handle]
+	 */
 	public function openFile($fileName, $flag)
 	{
 		try
@@ -79,7 +156,11 @@ class StylesModel {
 			throw new Exception("Error opening user style sheet: " + $e->getMessage());
 		}
 	}
-
+	/**
+	 * [closeFile Closes open handle created by PHP function fopen.]
+	 * @param  [type] $handle [PHP handle created by fopen.]
+	 * @return [boolean]         [If handle closes return true.]
+	 */
 	public function closeFile($handle)
 	{
 		try
@@ -92,11 +173,17 @@ class StylesModel {
 			throw new Exception("Error closing user style sheet: " + $e->getMessage());
 		}
 	}
-
+	/**
+	 * [writeToFile Helper method to use PHP fwrite function to write data to file.]
+	 * @param  [handle] $handle [PHP handle created by fopen function.]
+	 * @param  [string] $data   [styles to write to file]
+	 * @return [boolean]        [Returns true if content successfully writes to file.]
+	 */
 	public function writeToFile($handle, $data)
 	{
 		try
 		{
+			showMe($data);
 			fwrite($handle, $data);
 			return true;
 		}

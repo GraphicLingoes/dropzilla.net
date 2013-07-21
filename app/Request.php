@@ -10,7 +10,7 @@ class Request {
 	 * @param [type] $key   [description]
 	 * @param [type] $value [description]
 	 */
-	public function add ($key, $value=null) 
+	public function set ($key, $value=null) 
 	{
 		if(is_array($key))
 		{
@@ -21,7 +21,7 @@ class Request {
 		} 
 		else 
 		{
-			$this->dataStore[$k] = $value;
+			$this->dataStore[$key] = $value;
 		}
 	}
 	/**
