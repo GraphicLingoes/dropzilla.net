@@ -96,9 +96,8 @@ Abstract class Base_Controller {
 		if(!empty(self::$_globalVars)) {
 			extract(self::$_globalVars, EXTR_SKIP);
 		}
-		//self::$_viewStore = file_get_contents($file);
+
 		require_once $file;
-		//return file_get_contents($file);
 	}
 	/**
 	 * [set description]
