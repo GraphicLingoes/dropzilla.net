@@ -199,7 +199,7 @@ $('a[name="addMenuParentBorders"]').on('click', function(e){
 		var rightBorder = $('#dzParentBorderRight').val() + "px " + Dropzilla.history.get("borderType") + " " + Dropzilla.history.get("borderColor");
 		var bottomBorder = $('#dzParentBorderBottom').val() + "px " + Dropzilla.history.get("borderType") + " " + Dropzilla.history.get("borderColor");
 		var leftBorder = $('#dzParentBorderLeft').val() + "px " + Dropzilla.history.get("borderType") + " " + Dropzilla.history.get("borderColor");
-		
+	
 		Dropzilla.history.set("parentMenuItemsCss", topBorder, {
 			item: "parentMenuItemsCss",
 			key: "border-top"
@@ -258,5 +258,5 @@ $("#dzGetCode").on('click', function(e){
 	e.stopPropagation();
 	var dropzillaCode = $("#drozillaStage").html();
 	var baseCSS = "<style>#dzParentMenuUl { list-style-type: none; } #dzParentMenuUl a:link { text-decoration: none; }</style>";
-	$("#dropzillaCodeView").text(baseCSS + dropzillaCode); 
+	$("#dropzillaCodeView").text(baseCSS + dropzillaCode);
 });

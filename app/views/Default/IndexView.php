@@ -18,7 +18,6 @@
         <div id="drozillaStage"></div>
         <div id="result"></div>
       </div>
-
       <div id="push"></div>
     </div>
 

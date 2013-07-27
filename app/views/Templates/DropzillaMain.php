@@ -3,8 +3,7 @@
 require_once(SYS_TEMPLATES . '/global_header.html'); 
 ?>
 <? 
-// Echo out main body content
-echo $content; 
+require_once($content);
 ?>
 <? 
 // Finally include global footer

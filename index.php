@@ -1,4 +1,7 @@
 <?
+function showMe($showMeArray) {
+	echo '<pre>' . print_r($showMeArray, 1) . '</pre>';
+}
 // Dropzilla Main index
 // Set App Path
 $appPath = 'app';

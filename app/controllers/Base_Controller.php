@@ -63,9 +63,9 @@ Abstract class Base_Controller {
 		// Check to see if template should be used.
 		if(self::$_template !== false) {
 			$name .= '_' . $action . 'View';
-			$content = self::includeClass($name);
+			$contentTemplate = $name;
 			$name = "templates_" . self::$_template;
-			self::$_viewStore = self::includeClass($name);
+			self::$_viewStore = self::includeClass($name, $contentTemplate);
 		} else {
 			// Otherwise template is not being used.
 			$name .= '_' . $action . 'View';
@@ -80,10 +80,14 @@ Abstract class Base_Controller {
 	 * @return  void
 	 * @throws Exception
 	 */
-	static protected function includeClass($name)
+	static protected function includeClass($name, $templateContent = null)
 	{
 		$file = SYS_VIEWS . "/";
 		$file .= str_replace('_', DIRECTORY_SEPARATOR, $name) . '.php';
+
+		if($templateContent !== null) {
+			$content = SYS_VIEWS . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $templateContent) . '.php';
+		}
 
 		if (!file_exists($file)) {
 			throw new Exception("View file not found!");
@@ -94,6 +98,7 @@ Abstract class Base_Controller {
 		}
 		//self::$_viewStore = file_get_contents($file);
 		require_once $file;
+		//return file_get_contents($file);
 	}
 	/**
 	 * [set description]

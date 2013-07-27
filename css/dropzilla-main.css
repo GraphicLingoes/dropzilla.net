@@ -34,10 +34,9 @@
 	display: block;
 }
 .btn {
-	margin-bottom: 17px;
+	margin-bottom: 10px;
 }
 #header-controls input[type="text"] {
-	padding: 15px 5px 15px 5px;
 	width: 141px;
 }
 
@@ -77,7 +76,7 @@
 #header-controls #paddingMarginWrapper { margin-top: 9px;width: 100%; }
 #header-controls .dzPaddingOptions { width: 100% }
 #header-controls .dzPaddingOptions input[type="text"] {
-	width: 39px;
+	width: 21px;
 }
 
 .dzPaddingOptionsA {
@@ -104,7 +103,7 @@
 **************************/
 #header-controls .dzMarginOptions { width: 100%; height: 63px; }
 #header-controls .dzMarginOptions input[type="text"] {
-	width: 39px;
+	width: 21px;
 }
 
 .dzMarginOptionsA {
@@ -126,7 +125,7 @@
 **************************/
 #header-controls .dzBorderOptions { width: 100% }
 #header-controls .dzBorderOptions input[type="text"] {
-	width: 39px;
+	width: 21px;
 }
 
 .dzBorderOptionsA {
