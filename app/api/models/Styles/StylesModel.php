@@ -121,10 +121,36 @@ class StylesModel {
 			throw new Exception("Styles Model, updateCssBySelector => " . $e.getMessage());
 		}
 	}
-
+	/**
+	 * [removeCssBySelector This method searches for CSS style within given filename and removes it.
+	 *  Then it will return updated CSS string.]
+	 * @return [mixed] [Returns false if no match is found or a string with updated content if match is found.]
+	 */
 	public function removeCssBySelector()
 	{
+		try
+		{
+			$fileContents = file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $this->request->get('fileName') . ".css");
+			
+			$regex = "/(" . $this->request->get('cssSelector') . "{1}\s{(?<innerCss>(\s\t.*?){1,}\s)}){1}/";
+			$matchFound = preg_match($regex, $fileContents, $matches);
 
+			if($matchFound === false ||  $matchFound == 0)
+			{
+				// No match is found, return false.
+				return false;
+			}
+			else
+			{
+				$updatedCSS = preg_replace($regex, "", $fileContents);
+				return $updatedCSS;
+			}
+
+		}
+		catch (Exception $e)
+		{
+			throw new Exception("Styles Model, removeCssBySelector => " . $e.getMessage());
+		}
 	}
 	/**
 	 * [checkFile Checks to see if provided stylesheet exists in the user_content directory.]
@@ -183,7 +209,6 @@ class StylesModel {
 	{
 		try
 		{
-			showMe($data);
 			fwrite($handle, $data);
 			return true;
 		}
