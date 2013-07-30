@@ -43,6 +43,7 @@ Dropzilla.history = function () {
 	};
 
 	return {
+		config: config,
 		set: set,
 		get: get,
 		remove: remove

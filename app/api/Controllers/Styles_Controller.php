@@ -11,7 +11,6 @@ class Styles_Controller extends Base_Controller {
 		$request = parent::$request;
 		$model = parent::getModel('Styles', 'Styles');
 		// Attempt to build css
-		// 
 		$handle = $model->openFile(parent::$request->get("fileName"), "a+");
 		$css = $model->buildCss();
 			

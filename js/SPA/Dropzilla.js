@@ -46,7 +46,9 @@ Dropzilla = {
 	 * @return {[type]}          [description]
 	 */
 	bindPanelHandlers: function(panelScriptPath) {
-		$.get(panelScriptPath);
+		var script = document.createElement( 'script' );
+		script.src = panelScriptPath;
+		$("#externalScripts").append( script );
 	},
 	/**
 	 * [ description]
