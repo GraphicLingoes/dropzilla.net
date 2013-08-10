@@ -12,7 +12,7 @@ Dropzilla.Dropzilla_Main = function () {
 	 */
 	var init = function () {
 		var panelConfig = _config["panelClickHandlers"];
-		var mainPanel = $.get('/js/SPA/Templates/Modules/Main/controlPanel-main.html', function(result){
+		$.get('/js/SPA/Templates/Modules/Main/controlPanel-main.html', function(result){
 			$('#moduleScripts').append(result);
 			Dropzilla.bind('#panelBody', '#cp-main-panel');
 		}).done(function(data){

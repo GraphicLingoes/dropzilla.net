@@ -69,9 +69,10 @@ $('a[name="addMenuParentPadding"]').on('click', function(e){
 	var topPadding = $('#dzParentPaddingTop').val();
 	var padding;
 	if(topPadding.length > 0) {
-		var rightPadding = $('#dzParentPaddingRight').val();
-		var bottomPadding = $('#dzParentPaddingBottom').val();
-		var leftPadding = $('#dzParentPaddingLeft').val();
+		topPadding += "px";
+		var rightPadding = $('#dzParentPaddingRight').val() + "px";
+		var bottomPadding = $('#dzParentPaddingBottom').val() + "px";
+		var leftPadding = $('#dzParentPaddingLeft').val()  + "px";
 		Dropzilla.history.set("parentMenuItemsCss", topPadding, {
 			item: "parentMenuItemsCss",
 			key: "padding-top"
@@ -93,7 +94,7 @@ $('a[name="addMenuParentPadding"]').on('click', function(e){
 		$("#dzParentMenuUl li a").css("padding-bottom", bottomPadding);
 		$("#dzParentMenuUl li a").css("padding-left", leftPadding);
 	} else {
-		padding = $("#dzParentPadding").val();
+		padding = $("#dzParentPadding").val() + "px";
 		Dropzilla.history.set("parentMenuItemsCss", padding, {
 			item: "parentMenuItemsCss",
 			key: "padding"
@@ -128,9 +129,10 @@ $('a[name="addMenuParentMargins"]').on('click', function(e){
 	var topMargin = $('#dzParentMarginTop').val();
 	var allMargins;
 	if(topMargin.length > 0) {
-		var rightMargin = $('#dzParentMarginRight').val();
-		var bottomMargin = $('#dzParentMarginBottom').val();
-		var leftMargin = $('#dzParentMarginLeft').val();
+		topMargin += "px";
+		var rightMargin = $('#dzParentMarginRight').val() + "px";
+		var bottomMargin = $('#dzParentMarginBottom').val() + "px";
+		var leftMargin = $('#dzParentMarginLeft').val() + "px";
 		Dropzilla.history.set("parentMenuItemsCss", topMargin, {
 			item: "parentMenuItemsCss",
 			key: "margin-top"
@@ -153,7 +155,7 @@ $('a[name="addMenuParentMargins"]').on('click', function(e){
 		$('#dzParentMenuUl li').css('margin-bottom', bottomMargin);
 		$('#dzParentMenuUl li').css('margin-left', leftMargin);
 	} else {
-		allMargins = $('#dzParentMargins').val();
+		allMargins = $('#dzParentMargins').val() + "px";
 		Dropzilla.history.set("parentMenuItemsCss", allMargins, {
 			item: "parentMenuItemsCss",
 			key: "margin"

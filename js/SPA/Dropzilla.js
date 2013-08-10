@@ -30,14 +30,15 @@ Dropzilla = {
 		var self = this;
 		$.get('js/header-controls.js').done(function(e){
 			for(var i = 0; i < panelConfigs.length; i++) {
-				self.bindPanelHandlers(panelConfigs[i]);
+				self.bindScripts(panelConfigs[i]);
 			}
 		});
 		// If initial load, load necessary files
 		if(initLoad) {
-			$.get('libs/spectrumColorPicker/spectrum.js');
-			$.get('libs/spectrumColorPicker/panel1-init.js');
-			$.get('js/SPA/Modules/History/history.js');
+			self.bindScripts('libs/spectrumColorPicker/spectrum.js');
+			self.bindScripts('libs/spectrumColorPicker/panel1-init.js');
+			self.bindScripts('js/SPA/Modules/History/history.js');
+			self.bindScripts('js/SPA/Modules/Validation/formValidator.js');
 		}
 	},
 	/**
@@ -45,7 +46,7 @@ Dropzilla = {
 	 * @param  {[type]} panelKey [description]
 	 * @return {[type]}          [description]
 	 */
-	bindPanelHandlers: function(panelScriptPath) {
+	bindScripts: function(panelScriptPath) {
 		var script = document.createElement( 'script' );
 		script.src = panelScriptPath;
 		$("#externalScripts").append( script );
