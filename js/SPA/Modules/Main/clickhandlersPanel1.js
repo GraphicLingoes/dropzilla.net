@@ -260,6 +260,17 @@ $("#dzGetCode").on('click', function(e){
 	e.stopPropagation();
 	/*var dropzillaCode = $("#drozillaStage").html();
 	var baseCSS = "<style>#dzParentMenuUl { list-style-type: none; } #dzParentMenuUl a:link { text-decoration: none; }</style>";*/
+	
+	$.ajax({
+		type: 'POST',
+		url:'http://dropzilla.dev/api/styles/add',
+		cache: false,
+		data: JSON.stringify({"fileName":"newTest","cssSelector":"#dzParentMenuUL","properties": Dropzilla.history.config["parentMenuItemsCss"]}),
+		success: function(result) {
+			alert('made it');
+		}
+	});
+
 	for (var k in Dropzilla.history.config)
 	{
 		for (var key in Dropzilla.history.config["parentMenuItems"])
