@@ -11,7 +11,11 @@ $('a[name="addMenuParentItem"]').on('click', function(e){
 	e.stopPropagation();
 	addParentMenu();
 });
-
+/**
+ * [addParentMenu method grabs parent menu item from UI, adds value to history
+ * then checks to see if any parent menu items exist yet. If they do not the
+ * parent UL is created with the first menu item, otherwise child li's are appended.]
+ */
 function addParentMenu () {
 	var menuItem = $('#dzParentMenuItem').val();
 	var initialMenuCheck = $('#dzParentMenuUl').length;
@@ -263,11 +267,11 @@ $("#dzGetCode").on('click', function(e){
 	
 	$.ajax({
 		type: 'POST',
-		url:'http://dropzilla.dev/api/styles/add',
+		url:'http://dropzilla.dev/api/styles/aggregate',
 		cache: false,
-		data: JSON.stringify({"fileName":"newTest","cssSelector":"#dzParentMenuUL","properties": Dropzilla.history.config["parentMenuItemsCss"]}),
+		data: JSON.stringify({"fileName":"newTest","cssSelector":"#test","properties": Dropzilla.history.config["parentMenuItemsCss"]}),
 		success: function(result) {
-			alert('made it');
+			//alert('made it');
 		}
 	});
 
@@ -279,11 +283,11 @@ $("#dzGetCode").on('click', function(e){
 		}
 	}
 
-	for (var k in Dropzilla.history.config)
+	for (var j in Dropzilla.history.config)
 	{
-		for (var key in Dropzilla.history.config["parentMenuItemsCss"])
+		for (var jkey in Dropzilla.history.config["parentMenuItemsCss"])
 		{
-			console.log(key + " => " + Dropzilla.history.config["parentMenuItemsCss"][key]);
+			console.log(jkey + " => " + Dropzilla.history.config["parentMenuItemsCss"][jkey]);
 		}
 	}
 

@@ -77,11 +77,9 @@ class StylesModel {
 		try
 		{
 			$fileContents = file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $this->request->get('fileName') . ".css");
-			
 			$regex = "/(" . $this->request->get('cssSelector') . "{1}\s{(?<innerCss>(\s\t.*?){1,}\s)}){1}/";
-			$matchFound = preg_match($regex, $fileContents, $matches);
 			
-			if($matchFound === false ||  $matchFound == 0)
+			if(!$this->findCssSelector($this->request->get('cssSelector'), $fileContents))
 			{
 				// No match is found, return false.
 				return false;
@@ -131,11 +129,9 @@ class StylesModel {
 		try
 		{
 			$fileContents = file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $this->request->get('fileName') . ".css");
-			
 			$regex = "/(" . $this->request->get('cssSelector') . "{1}\s{(?<innerCss>(\s\t.*?){1,}\s)}){1}/";
-			$matchFound = preg_match($regex, $fileContents, $matches);
-
-			if($matchFound === false ||  $matchFound == 0)
+			
+			if(!$this->findCssSelector($this->request->get('cssSelector'), $fileContents))
 			{
 				// No match is found, return false.
 				return false;
@@ -153,10 +149,33 @@ class StylesModel {
 		}
 	}
 	/**
+	 * [findCssSelector utility method used to find given CSS selector in current CSS file.
+	 * You can pass in the file contents or leave it null and the current request fileName
+	 * will be used to retrieve the file contents.]
+	 * @param  [string] $selectorName [CSS Selector]
+	 * @param  [string] $fileContents [Optional CSS file contents to match selector name in.]
+	 * @return [boolean]               [True if selector is found, otherwise false.]
+	 */
+	public function findCssSelector($selectorName, $fileContents = NULL) {
+		$_fileContents = $fileContents != NULL ? $fileContents : file_get_contents(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $this->request->get('fileName') . ".css");
+		$regex = "/(" . $this->request->get('cssSelector') . "{1}\s{(?<innerCss>(\s\t.*?){1,}\s)}){1}/";
+		$matchFound = preg_match($regex, $_fileContents, $matches);
+		if($matchFound === false ||  $matchFound == 0)
+			{
+				// No match is found, return false.
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+	}
+
+	/**
 	 * [checkFile Checks to see if provided stylesheet exists in the user_content directory.]
 	 * @return [boolean] [True if file exists, false if it does not.]
 	 */
-	private function checkFile()
+	public function checkFile()
 	{
 		if(file_exists(API_USER_STYLESHEETS . DIRECTORY_SEPARATOR . $this->request->get("fileName") . ".css"))
 		{

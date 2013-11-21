@@ -6,6 +6,26 @@ class Styles_Controller extends Base_Controller {
 
 	}
 
+	public function action_aggregate () {
+		// Check if css file exist
+		// Check if selector exist
+		// If selector exist call update
+		// If not call add
+		
+		$response = parent::$response;
+		$request = parent::$request;
+		$model = parent::getModel('Styles', 'Styles');
+		// Check to see if file exists
+		if ($model->checkFile()) {
+			// Check to see if selector exists to determine what to do.
+			if ($model->findCssSelector($request->get("cssSelector"))) {
+				$this->action_update();
+			} else {
+				$this->action_add();
+			}
+		}
+	}
+
 	public function action_add () {
 		$response = parent::$response;
 		$request = parent::$request;
@@ -14,7 +34,7 @@ class Styles_Controller extends Base_Controller {
 		$handle = $model->openFile(parent::$request->get("fileName"), "a+");
 		$css = $model->buildCss();
 			
-		if($model->writeToFile($handle, $css))
+		if ($model->writeToFile($handle, $css))
 		{
 			$response->set('result', array(
 				"passed" => 1
@@ -39,7 +59,7 @@ class Styles_Controller extends Base_Controller {
 		$model = parent::getModel('Styles', 'Styles');
 		$updatedCss = $model->updateCssBySelector();
 		$handle = $model->openFile(parent::$request->get("fileName"), "w");
-		if($model->writeToFile($handle, $updatedCss))
+		if ($model->writeToFile($handle, $updatedCss))
 		{
 			$response->set('result', array(
 				"passed" => 1
@@ -59,7 +79,7 @@ class Styles_Controller extends Base_Controller {
 		$model = parent::getModel('Styles', 'Styles');
 		$updatedCss = $model->removeCssBySelector();
 		$handle = $model->openFile(parent::$request->get("fileName"), "w");
-		if($model->writeToFile($handle, $updatedCss))
+		if ($model->writeToFile($handle, $updatedCss))
 		{
 			$response->set('result', array(
 				"passed" => 1

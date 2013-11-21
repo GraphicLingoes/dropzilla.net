@@ -50,7 +50,6 @@ if (!file_exists($file)) {
 } else {
 	require_once API_CONTROLLERS_PATH . DIRECTORY_SEPARATOR . 'Base_Controller.php';
 	require_once $file;
-	//TODO: Fix route to be dynamic so you can grab the controller name from it.
 	$controller = new $className();
 	$controller::setRouter($router);
 	$controller::setResponse($response);

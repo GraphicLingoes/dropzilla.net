@@ -1,5 +1,5 @@
 <?
-// TODO: include in index.php file and finishe sanitation functions
+// TODO: include in index.php file and finish sanitation functions
 Class utils {
 
 	public function __construct() {
