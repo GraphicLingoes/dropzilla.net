@@ -264,7 +264,8 @@ $("#dzGetCode").on('click', function(e){
 	e.stopPropagation();
 	/*var dropzillaCode = $("#drozillaStage").html();
 	var baseCSS = "<style>#dzParentMenuUl { list-style-type: none; } #dzParentMenuUl a:link { text-decoration: none; }</style>";*/
-	
+	// TODO: Change Dropzilla.history.set to use an array full of property objects so you can set the parent link color
+	// TODO: Chage the styles model to iterate through the properties with the new construct
 	$.ajax({
 		type: 'POST',
 		url:'http://dropzilla.dev/api/styles/aggregate',
