@@ -264,33 +264,42 @@ $("#dzGetCode").on('click', function(e){
 	e.stopPropagation();
 	/*var dropzillaCode = $("#drozillaStage").html();
 	var baseCSS = "<style>#dzParentMenuUl { list-style-type: none; } #dzParentMenuUl a:link { text-decoration: none; }</style>";*/
-	// TODO: Change Dropzilla.history.set to use an array full of property objects so you can set the parent link color
-	// TODO: Chage the styles model to iterate through the properties with the new construct
-	$.ajax({
-		type: 'POST',
-		url:'http://dropzilla.dev/api/styles/aggregate',
-		cache: false,
-		data: JSON.stringify({"fileName":"newTest","cssSelector":"#test","properties": Dropzilla.history.config["parentMenuItemsCss"]}),
-		success: function(result) {
-			//alert('made it');
-		}
-	});
-
-	for (var k in Dropzilla.history.config)
-	{
-		for (var key in Dropzilla.history.config["parentMenuItems"])
-		{
-			console.log(key + " => " + Dropzilla.history.config["parentMenuItems"][key]);
-		}
+	if (typeof Dropzilla.history.config["parentMenuItemsLinkCss"] != "undefined" && Dropzilla.history.config["parentMenuItemsLinkCss"].length > 0) {
+		// First set the non-a:link settings then in the success callback set the rest.
+		$.ajax({
+				type: 'POST',
+				url:'http://dropzilla.dev/api/styles/aggregate',
+				cache: false,
+				data: JSON.stringify({"fileName":"newTest","cssSelector":"#test","properties": Dropzilla.history.config["parentMenuItemsCss"]}),
+				success: function(result) {
+					$.ajax({
+						type: 'POST',
+						url:'http://dropzilla.dev/api/styles/aggregate',
+						cache: false,
+						data: JSON.stringify({"fileName":"newTest","isLink":"true","cssSelector":"#test","properties": Dropzilla.history.config["parentMenuItemsLinkCss"]}),
+						success: function(result) {
+							//alert('made it');
+						}
+					});
+				}
+			});
 	}
 
-	for (var j in Dropzilla.history.config)
-	{
-		for (var jkey in Dropzilla.history.config["parentMenuItemsCss"])
-		{
-			console.log(jkey + " => " + Dropzilla.history.config["parentMenuItemsCss"][jkey]);
-		}
-	}
+	// for (var k in Dropzilla.history.config)
+	// {
+	// 	for (var key in Dropzilla.history.config["parentMenuItems"])
+	// 	{
+	// 		console.log(key + " => " + Dropzilla.history.config["parentMenuItems"][key]);
+	// 	}
+	// }
+
+	// for (var j in Dropzilla.history.config)
+	// {
+	// 	for (var jkey in Dropzilla.history.config["parentMenuItemsCss"])
+	// 	{
+	// 		console.log(jkey + " => " + Dropzilla.history.config["parentMenuItemsCss"][jkey]);
+	// 	}
+	// }
 
 	//$("#dropzillaCodeView").text(baseCSS + dropzillaCode);
 });

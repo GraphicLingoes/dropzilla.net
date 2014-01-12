@@ -11,6 +11,12 @@ class Styles_Controller extends Base_Controller {
 		// Check if selector exist
 		// If selector exist call update
 		// If not call add
+		// 
+		// 
+		// TODO: Add logic for adding link css properties
+		// a new property has been added to the request called isLink
+		// if this property is set then logic needs to be added
+		// to handle adding each link property to the css file separately
 		
 		$response = parent::$response;
 		$request = parent::$request;

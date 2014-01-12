@@ -1,7 +1,8 @@
 Dropzilla.history = function () {
 	var config = {
 		parentMenuItems: {},
-		parentMenuItemsCss: {}
+		parentMenuItemsCss: {},
+		parentMenuItemsLinkCss: {}
 	};
 
 	var set = function(key, value, setConfig) {
@@ -11,6 +12,9 @@ Dropzilla.history = function () {
 					config[key][setConfig.key] = value;
 					break;
 				case 'parentMenuItemsCss':
+					config[key][setConfig.key] = value;
+					break;
+				case 'parentMenuItemsLinkCss':
 					config[key][setConfig.key] = value;
 					break;
 			}

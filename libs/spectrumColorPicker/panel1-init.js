@@ -108,7 +108,7 @@ $("#parentLinkColor").spectrum({
     localStorageKey: "spectrum.parentLinkColor",
     change: function(color) {
           Dropzilla.history.set("parentMenuItemsCss", color.toHexString(), {
-            item: "parentMenuItemsCss",
+            item: "parentMenuItemsLinkCss",
             key: "a:link"
         });
 
@@ -144,7 +144,7 @@ $("#parentLinkHoverColor").spectrum({
     localStorageKey: "spectrum.parentLinkHoverColor",
     change: function(color) {
          Dropzilla.history.set("parentMenuItemsCss", color.toHexString(), {
-            item: "parentMenuItemsCss",
+            item: "parentMenuItemsLinkCss",
             key: "a:hover"
         });
 
