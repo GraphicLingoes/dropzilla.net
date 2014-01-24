@@ -9,26 +9,5 @@
     <script src="js/SPA/Modules/Main/main.js"></script>
   </div>
   <div id="externalScripts"></div>
-  <script>
-  $('a[name="ajaxPost"]').click(function(e){
-      $.ajax({
-          url: 'http://dropzillav2.dev/api-defaultapicontroller/test/testaction/12',
-          type: 'POST',
-          accepts: "text/html",
-          contentType: "application/json",
-          data: JSON.stringify({
-            test: "mike",
-            test2: "aguilar"
-          }),
-          success: function(data) {
-              $("#result").html(data);
-          },
-          error: function(xhr, errorStatus, error) {
-              alert(errorStatus + " " + error);
-          }
-      });
-  });
-</script>
-
   </body>
 </html>

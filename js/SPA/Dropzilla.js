@@ -38,7 +38,7 @@ Dropzilla = {
 			self.bindScripts('libs/spectrumColorPicker/spectrum.js');
 			self.bindScripts('libs/spectrumColorPicker/panel1-init.js');
 			self.bindScripts('js/SPA/Modules/History/history.js');
-			self.bindScripts('js/SPA/Modules/Validation/formValidator.js');
+			self.bindScripts('js/SPA/formValidator.js');
 		}
 	},
 	/**
